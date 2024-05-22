@@ -9,16 +9,16 @@ init()
 async function init() {
   await model.loadingData()
   view.renderItems(model.data)
-	addEventListeners()
+  addEventListeners()
 }
 
 function addEventListeners() {
-  view.elements.sortTypeSelect.addEventListener("change", onClickSorting)
-  view.elements.sortCategorySelect.addEventListener("change", onClickSorting)
-  view.elements.sortOrderSelect.addEventListener("change", onClickSorting)
+  view.elements.sortTypeSelect.addEventListener("change", sortProduct)
+  view.elements.sortCategorySelect.addEventListener("change", sortProduct)
+  view.elements.sortOrderSelect.addEventListener("change", sortProduct)
 }
 
-function onClickSorting() {
+function sortProduct() {
   const sortingValue = view.sortingElementsValue()
   console.log(sortingValue)
 }
