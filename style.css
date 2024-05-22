@@ -16,6 +16,8 @@ body {
   display: grid;
   gap: 15px;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	align-items: end;
+
 }
 
 .sortContent {
@@ -47,6 +49,7 @@ button {
   padding: 12px 20px;
   max-height: 55px;
   cursor: pointer;
+	margin-bottom: 10px;
 }
 
 ul {
