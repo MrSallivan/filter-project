@@ -21,4 +21,6 @@ function addEventListeners() {
 function sortProduct() {
   const sortingValue = view.sortingElementsValue()
   console.log(sortingValue)
+  const filteredItems = model.filteringData(sortingValue)
+  console.log(filteredItems)
 }
