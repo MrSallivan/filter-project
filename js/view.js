@@ -32,5 +32,19 @@ export class View {
     }
   }
 
-	
+  sortingElements() {
+    return {
+      sortType: this.elements.sortTypeSelect,
+      sortOrder: this.elements.sortOrderSelect,
+      sortCategory: this.elements.sortCategorySelect
+    }
+  }
+
+  resetFilter(elementsObj) {
+    const { sortType, sortOrder, sortCategory } = elementsObj
+    this.elements.filterInput.value = ""
+    sortOrder.value = "asc"
+    sortType.value = "price"
+    sortCategory.value = "all"
+  }
 }

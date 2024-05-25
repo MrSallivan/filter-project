@@ -16,11 +16,25 @@ function addEventListeners() {
   view.elements.sortTypeSelect.addEventListener("change", sortProduct)
   view.elements.sortCategorySelect.addEventListener("change", sortProduct)
   view.elements.sortOrderSelect.addEventListener("change", sortProduct)
+  view.elements.filterInput.addEventListener("input", filterProduct)
+  view.elements.form.addEventListener("submit", resetFilter)
 }
 
 function sortProduct() {
   const sortingValue = view.sortingElementsValue()
-  console.log(sortingValue)
   const filteredItems = model.filteringData(sortingValue)
-  console.log(filteredItems)
+  view.renderItems(filteredItems)
+}
+
+function filterProduct(){
+	const value = this.value.toLowerCase()
+	model.filterSearch(value)
+	sortProduct()
+}
+
+function resetFilter(e){
+  e.preventDefault()
+	const sortingElements = view.sortingElements()
+	view.resetFilter(sortingElements)
+	sortProduct()
 }
