@@ -21,15 +21,28 @@ export class Model {
   }
 
   filteringData(sortsArray) {
-    const { sortType, sortCategory, sortOrder } = sortsArray
+    const { sortType, sortCategory, sortOrder, input } = sortsArray
     let filteredData
-    if (sortCategory !== "all") {
+    if (sortCategory !== "all" && input === "") {
       filteredData = this.filterData.filter((item) => {
         return item.category === sortCategory
       })
+    } else if (sortCategory === "all" && input !== "") {
+      filteredData = [...this.data]
+      filteredData = filteredData.filter((product) => {
+        return product.name.toLowerCase().includes(input.toLowerCase())
+      })
+    } else if (sortCategory !== "all" && input !== "") {
+      filteredData = this.filterData.filter((item) => {
+        return item.category === sortCategory
+      })
+      filteredData = filteredData.filter((product) => {
+        return product.name.toLowerCase().includes(input.toLowerCase())
+      })
     } else {
-      filteredData = [...this.filterData]
+      filteredData = [...this.data]
     }
+
     return filteredData.sort((a, b) => {
       switch (sortType) {
         case "date":
@@ -66,13 +79,13 @@ export class Model {
     })
   }
 
-  filterSearch(value) {
-    if (value === "") {
-      this.filterData = [...this.data]
-    } else {
-      this.filterData = this.filterData.filter((product) => {
-        return product.name.toLowerCase().includes(value)
-      })
-    }
-  }
+  // filterSearch(value) {
+  //   if (value === "") {
+  //     this.filterData = [...this.filterData]
+  //   } else {
+  //     this.filterData = this.filterData.filter((product) => {
+  //       return product.name.toLowerCase().includes(value)
+  //     })
+  //   }
+  // }
 }

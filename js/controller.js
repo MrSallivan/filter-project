@@ -16,7 +16,7 @@ function addEventListeners() {
   view.elements.sortTypeSelect.addEventListener("change", sortProduct)
   view.elements.sortCategorySelect.addEventListener("change", sortProduct)
   view.elements.sortOrderSelect.addEventListener("change", sortProduct)
-  view.elements.filterInput.addEventListener("input", filterProduct)
+  view.elements.filterInput.addEventListener("input", sortProduct)
   view.elements.form.addEventListener("submit", resetFilter)
 }
 
@@ -26,11 +26,11 @@ function sortProduct() {
   view.renderItems(filteredItems)
 }
 
-function filterProduct(){
-	const value = this.value.toLowerCase()
-	model.filterSearch(value)
-	sortProduct()
-}
+// function filterProduct(){
+// 	const value = this.value.toLowerCase()
+// 	model.filterSearch(value)
+// 	sortProduct()
+// }
 
 function resetFilter(e){
   e.preventDefault()

@@ -28,7 +28,8 @@ export class View {
     return {
       sortType: this.elements.sortTypeSelect.value,
       sortOrder: this.elements.sortOrderSelect.value,
-      sortCategory: this.elements.sortCategorySelect.value
+      sortCategory: this.elements.sortCategorySelect.value,
+      input: this.elements.filterInput.value
     }
   }
 
@@ -36,13 +37,14 @@ export class View {
     return {
       sortType: this.elements.sortTypeSelect,
       sortOrder: this.elements.sortOrderSelect,
-      sortCategory: this.elements.sortCategorySelect
+      sortCategory: this.elements.sortCategorySelect,
+			input: this.elements.filterInput
     }
   }
 
   resetFilter(elementsObj) {
-    const { sortType, sortOrder, sortCategory } = elementsObj
-    this.elements.filterInput.value = ""
+    const { sortType, sortOrder, sortCategory, input } = elementsObj
+    input.value = ""
     sortOrder.value = "asc"
     sortType.value = "price"
     sortCategory.value = "all"
