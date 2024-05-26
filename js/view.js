@@ -12,11 +12,16 @@ export class View {
 
   renderItems(items) {
     this.elements.productList.innerHTML = ""
+
     items.forEach((element) => {
+      const name = this.hightLightFilterValue(
+        element.name,
+        this.elements.filterInput.value
+      )
       const markup = `
 				<li>
 					  <b><span>${element.subtitle}</span></b>
-						<p>${element.name}</p>
+						<p>${name}</p>
 						<p>Цена:<i> ${element.price}</i> руб.</p>
 						<p>Дата добавления: ${element.date}</p>
 				</li>
@@ -38,7 +43,7 @@ export class View {
       sortType: this.elements.sortTypeSelect,
       sortOrder: this.elements.sortOrderSelect,
       sortCategory: this.elements.sortCategorySelect,
-			input: this.elements.filterInput
+      input: this.elements.filterInput
     }
   }
 
@@ -48,5 +53,19 @@ export class View {
     sortOrder.value = "asc"
     sortType.value = "price"
     sortCategory.value = "all"
+  }
+
+  hightLightFilterValue(name, filterValue) {
+    const lowerCaseName = name.toLowerCase()
+    const lowerCaseFilterValue = filterValue.toLowerCase()
+    const startIdx = lowerCaseName.indexOf(lowerCaseFilterValue)
+    if (startIdx !== -1) {
+      const start = name.substring(0, startIdx)
+      const interval = name.substring(startIdx, startIdx + filterValue.length)
+      const end = name.substring(startIdx + filterValue.length)
+      const highlightName = `${start}<span class="active">${interval}</span>${end}`
+      return highlightName
+    }
+    return name
   }
 }

@@ -8,7 +8,9 @@ init()
 
 async function init() {
   await model.loadingData()
-  view.renderItems(model.data)
+	const sortingElements = view.sortingElements()
+	model.updateFromURL(sortingElements)
+	sortProduct()
   addEventListeners()
 }
 
@@ -24,13 +26,8 @@ function sortProduct() {
   const sortingValue = view.sortingElementsValue()
   const filteredItems = model.filteringData(sortingValue)
   view.renderItems(filteredItems)
+	model.updateUrl(sortingValue)
 }
-
-// function filterProduct(){
-// 	const value = this.value.toLowerCase()
-// 	model.filterSearch(value)
-// 	sortProduct()
-// }
 
 function resetFilter(e){
   e.preventDefault()

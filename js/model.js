@@ -78,14 +78,26 @@ export class Model {
       }
     })
   }
+  updateUrl(sortingValue) {
+    const { sortType, sortCategory, sortOrder } = sortingValue
+    const urlParams = new URLSearchParams()
 
-  // filterSearch(value) {
-  //   if (value === "") {
-  //     this.filterData = [...this.filterData]
-  //   } else {
-  //     this.filterData = this.filterData.filter((product) => {
-  //       return product.name.toLowerCase().includes(value)
-  //     })
-  //   }
-  // }
+    urlParams.set("sortType", sortType)
+    urlParams.set("sortOrder", sortOrder)
+    urlParams.set("sortCategory", sortCategory)
+
+    window.history.replaceState(null, null, `?${urlParams.toString()}`)
+  }
+  updateFromURL(sortingElements) {
+    const { sortType, sortCategory, sortOrder } = sortingElements
+    const urlParams = new URLSearchParams(window.location.search)
+
+     const sortTypeValue = urlParams.get("sortType") || "price"
+     const sortOrderValue = urlParams.get("sortOrder") || "asc"
+     const sortCategoryValue = urlParams.get("sortCategory") || "all"
+		 
+		 sortType.value = sortTypeValue
+		 sortCategory.value = sortCategoryValue
+		 sortOrder.value = sortOrderValue
+  }
 }
